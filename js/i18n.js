@@ -4,7 +4,7 @@ const I18n = {
     translations: {
         zh: {
             pageTitle: 'Apple Music 歌单转换器',
-            pageDescription: '把 Apple Music 导出的歌单转换成其他音乐软件能识别的格式 · 纯本地处理，保护隐私',
+            pageDescription: '把 Apple Music 导出的歌单转换成其他音乐软件能识别的格式',
             version: 'v1.0.0',
             
             tabConverter: '转换器',
@@ -53,7 +53,7 @@ const I18n = {
         },
         en: {
             pageTitle: 'Apple Music Playlist Converter',
-            pageDescription: 'Convert Apple Music exported playlists to formats compatible with other music players · 100% local processing, privacy protected',
+            pageDescription: 'Convert Apple Music exported playlists to formats compatible with other music players',
             version: 'v1.0.0',
             
             tabConverter: 'Converter',
