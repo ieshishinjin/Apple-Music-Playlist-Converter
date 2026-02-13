@@ -42,9 +42,9 @@
 ## 使用方法
 
 ### 方式一：使用 GitHub Pages（推荐）
-- [GitHub Pages]()
+- [GitHub Pages](https://ieshishinjin.github.io/Apple-Music-Playlist-Converter/index.html)
 
 ### 方式二：本地运行
 ```bash
-git clone https://github.com/ieshishinjin/apple-music-playlist-converter.git
+git clone https://github.com/ieshishinjin/Apple-Music-Playlist-Converter.git
 # 在浏览器中打开 index.html

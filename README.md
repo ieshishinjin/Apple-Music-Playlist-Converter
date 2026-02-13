@@ -44,10 +44,9 @@ A clean and elegant tool to convert Apple Music exported playlists into formats 
 ## 🛠️ Installation
 
 ### Option 1: Use GitHub Pages (Recommended)
-- [GitHub Pages](https://ieshishinjin.github.io/apple-music-playlist-converter/index.html)
+- [GitHub Pages](https://ieshishinjin.github.io/Apple-Music-Playlist-Converter/index.html)
 
 ### Option 2: Run Locally
 ```bash
-git clone https://github.com/ieshishinjin/apple-music-playlist-converter.git
-cd apple-music-playlist-converter
+git clone https://github.com/ieshishinjin/Apple-Music-Playlist-Converter.git
 # Open index.html in your browser
