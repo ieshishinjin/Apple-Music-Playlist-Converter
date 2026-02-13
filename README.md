@@ -2,6 +2,10 @@
 
 A clean and elegant tool to convert Apple Music exported playlists or entire library into formats compatible with other music players.
 
+## 中文版README
+
+[README-ZH.md](README-ZH.md)
+
 ## ✨ Features
 
 - 🎵 **100% Local Processing** - Your data never leaves your browser
