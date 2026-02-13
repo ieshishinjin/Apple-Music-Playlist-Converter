@@ -1,0 +1,37 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-canvas-default: #0d1117;
+        --color-canvas-subtle: #161b22;
+        --color-canvas-inset: #010409;
+        --color-primary: #2f81f7;
+        --color-primary-hover: #3c8cff;
+        --color-border-default: #30363d;
+        --color-border-muted: #21262d;
+        --color-neutral-muted: #6e768166;
+        --color-fg-default: #e6edf3;
+        --color-fg-muted: #7d8590;
+        --color-fg-subtle: #8b949e;
+        --color-accent-fg: #2f81f7;
+        --color-accent-emphasis: #1f6feb;
+        --color-success-fg: #3fb950;
+        --color-attention-fg: #d29922;
+        --color-danger-fg: #f85149;
+    }
+
+    .flash-success {
+        color: #ffffff;
+        background-color: #1f472b;
+        border-color: #2d5a3a;
+    }
+
+    .flash-warn {
+        color: #ffffff;
+        background-color: #4e3c1a;
+        border-color: #6b4d1f;
+    }
+
+    .preview {
+        background-color: #0d1117;
+        border-color: #30363d;
+    }
+}
