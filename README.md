@@ -1,10 +1,6 @@
 # Apple Music Playlist Converter
 
-A clean and elegant tool to convert Apple Music exported playlists into formats compatible with other music players.
-
-## 中文版README
-
-[README-ZH.md](README-ZH.md)
+A clean and elegant tool to convert Apple Music exported playlists or entire library into formats compatible with other music players.
 
 ## ✨ Features
 
@@ -29,17 +25,18 @@ A clean and elegant tool to convert Apple Music exported playlists into formats 
 
 1. **Export from Apple Music** (Desktop)
    - Select your playlist
-   - Go to Menu Bar → File → Library → Export Playlist
-   - Open the exported file
+   - Go to Menu Bar → File → Library → Export Playlist or Export Library
+   - Open the exported document or upload it
 
 2. **Convert with this tool**
-   - Paste the content into the input box
+   - Paste the content into the input box or upload the exported file
    - Choose your output format
    - Click "Convert Playlist"
    - Copy or download the result
 
 3. **Import to your music player**
    - Most players support drag-and-drop or import from text file
+   - Supports NetEase Cloud Music, QQ Music and other players
 
 ## 🛠️ Installation
 

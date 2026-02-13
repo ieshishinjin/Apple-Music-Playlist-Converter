@@ -76,6 +76,23 @@
                             </svg>
                             <span data-i18n="pasteExample">粘贴示例</span>
                         </button>
+                        <button class="btn btn-secondary" id="pasteXmlExampleBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M2 1.75C2 .784 2.784 0 3.75 0h8.5C13.216 0 14 .784 14 1.75v12.5A1.75 1.75 0 0 1 12.25 16h-8.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25Z"/>
+                                <path d="M6.5 5.5v5a.75.75 0 0 0 1.5 0v-5a.75.75 0 0 0-1.5 0Zm4 0v5a.75.75 0 0 0 1.5 0v-5a.75.75 0 0 0-1.5 0Z"/>
+                            </svg>
+                            <span data-i18n="pasteXmlExample">XML示例</span>
+                        </button>
+                        
+                        <!-- 新增：文件上传按钮 -->
+                        <input type="file" id="fileInput" accept=".xml,.txt,.tsv,.plist" style="display: none;">
+                        <button class="btn btn-secondary" id="uploadFileBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M3.75 2h8.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2ZM3.5 3.75v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Z"/>
+                                <path d="M5.5 5.5h5v1.5h-5V5.5Zm0 3h5v1.5h-5V8.5Z"/>
+                            </svg>
+                            <span data-i18n="uploadFile">上传文件</span>
+                        </button>
                         <button class="btn btn-secondary" id="clearBtn">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M2.75 2.5h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5Z"></path>
@@ -172,7 +189,24 @@
                     </div>
                 </div>
             </div>
-
+            <!-- 进度条 - 放在statsBox和outputBox之间 -->
+            <div id="progressBox" class="Box" style="display: none;">
+                <div class="Box-header">
+                    <div class="Box-title">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8A1.5 1.5 0 0 0 3 3v8.25a2.5 2.5 0 0 1 1.5-.25h8Z"/>
+                        </svg>
+                        <span data-i18n="progress">解析进度</span>
+                    </div>
+                </div>
+                <div class="Box-body">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">正在解析XML文件...</div>
+                    <div class="progress-detail" id="progressDetail"></div>
+                </div>
+            </div>
             <div id="outputBox" class="Box" style="display: none;">
                 <div class="Box-header">
                     <div class="Box-title">

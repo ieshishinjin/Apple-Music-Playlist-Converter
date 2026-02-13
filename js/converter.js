@@ -3,11 +3,204 @@ const PlaylistConverter = {
 Long Tall Sally	Little Richard	Enotris Johnson, Robert "Bumps" Blackwell & Richard Penniman	Here's Little Richard (Deluxe Edition)						Rock	4888601	127	1	2	7	12	1956	2025/10/12 09:23	2025/10/12 09:23	256	44100		Apple Music AAC音频文件			2	2025/10/18 13:39	2	2025/10/28 19:46	
 Johnny B. Goode	Chuck Berry	Chuck Berry	Berry Is On Top						Rock	5996081	161	1	1	6	12	1955	2025/10/12 20:54	2025/10/12 20:54	256	44100		Apple Music AAC音频文件			13	2025/11/17 22:07	4	2025/12/6 07:36`,
 
+    exampleXmlData: `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Tracks</key>
+    <dict>
+        <key>7077</key>
+        <dict>
+            <key>Name</key><string>你一定要幸福</string>
+            <key>Artist</key><string>虎二</string>
+        </dict>
+        <key>7080</key>
+        <dict>
+            <key>Name</key><string>Intro</string>
+            <key>Artist</key><string>周杰伦</string>
+        </dict>
+    </dict>
+</dict>
+</plist>`,
+
     parse(input, options) {
         if (!input || typeof input !== 'string') {
             throw new Error('输入数据无效');
         }
 
+        if (this.isXmlFormat(input)) {
+            return this.parseXml(input, options);
+        } else {
+            return this.parseTsv(input, options);
+        }
+    },
+
+    isXmlFormat(input) {
+        const trimmed = input.trim();
+        return trimmed.startsWith('<?xml') || trimmed.startsWith('<plist');
+    },
+
+    parseXml(input, options, progressCallback) {
+        const { trimSpaces = true, removeDup = true } = options;
+        
+        const songs = [];
+        const duplicates = [];
+        const seen = new Set();
+
+        return new Promise((resolve, reject) => {
+            try {
+                // 使用 setTimeout 让UI能够更新
+                setTimeout(() => {
+                    try {
+                        console.log('========== XML解析开始 ==========');
+                        progressCallback?.({ text: '正在解析XML文件...', detail: '查找Tracks标签' });
+                        
+                        const tracksStart = input.indexOf('<key>Tracks</key>');
+                        if (tracksStart === -1) {
+                            throw new Error('没有找到Tracks标签');
+                        }
+                        
+                        progressCallback?.({ text: '找到Tracks标签', detail: '正在提取歌曲数据...' });
+                        
+                        const dictStart = input.indexOf('<dict>', tracksStart);
+                        if (dictStart === -1) {
+                            throw new Error('没有找到dict开始');
+                        }
+                        
+                        let dictCount = 1;
+                        let dictEnd = dictStart + 6;
+                        
+                        while (dictCount > 0 && dictEnd < input.length) {
+                            const nextOpen = input.indexOf('<dict>', dictEnd);
+                            const nextClose = input.indexOf('</dict>', dictEnd);
+                            
+                            if (nextClose === -1) break;
+                            
+                            if (nextOpen !== -1 && nextOpen < nextClose) {
+                                dictCount++;
+                                dictEnd = nextOpen + 6;
+                            } else {
+                                dictCount--;
+                                dictEnd = nextClose + 7;
+                            }
+                        }
+                        
+                        const tracksContent = input.substring(dictStart + 6, dictEnd - 7);
+                        console.log('Tracks内容长度:', tracksContent.length);
+                        
+                        const songBlocks = tracksContent.split(/(?=<key>\d+<\/key>)/);
+                        console.log('找到歌曲块数量:', songBlocks.length);
+                        
+                        progressCallback?.({ 
+                            text: `找到 ${songBlocks.length} 首歌曲`, 
+                            detail: '开始解析...',
+                            total: songBlocks.length,
+                            current: 0
+                        });
+                        
+                        for (let i = 0; i < songBlocks.length; i++) {
+                            const block = songBlocks[i];
+                            if (!block.trim()) continue;
+                            
+                            // 更新进度
+                            if (i % 10 === 0) {
+                                progressCallback?.({ 
+                                    text: `正在解析第 ${i+1}/${songBlocks.length} 首歌`, 
+                                    detail: block.substring(0, 50) + '...',
+                                    total: songBlocks.length,
+                                    current: i + 1
+                                });
+                            }
+                            
+                            const nameMatch = block.match(/<key>Name<\/key>\s*<string>(.*?)<\/string>/);
+                            if (!nameMatch) continue;
+                            const name = nameMatch[1];
+                            
+                            const artistMatch = block.match(/<key>Artist<\/key>\s*<string>(.*?)<\/string>/);
+                            if (!artistMatch) continue;
+                            const artist = artistMatch[1];
+                            
+                            let title = name;
+                            let artistName = artist;
+                            
+                            if (trimSpaces) {
+                                title = title.trim();
+                                artistName = artistName.trim();
+                            }
+                            
+                            const key = `${title}|${artistName}`.toLowerCase();
+                            
+                            if (removeDup) {
+                                if (seen.has(key)) {
+                                    duplicates.push({ title, artist: artistName });
+                                    continue;
+                                }
+                                seen.add(key);
+                            }
+                            
+                            songs.push({
+                                title,
+                                artist: artistName,
+                                key
+                            });
+                        }
+                        
+                        progressCallback?.({ 
+                            text: `解析完成！成功解析 ${songs.length} 首歌`, 
+                            detail: `重复: ${duplicates.length} 首`,
+                            total: songBlocks.length,
+                            current: songBlocks.length
+                        });
+                        
+                        if (songs.length === 0) {
+                            reject(new Error('没有找到有效的歌曲数据'));
+                        } else {
+                            resolve({
+                                songs,
+                                duplicates,
+                                stats: {
+                                    total: songs.length,
+                                    duplicateCount: duplicates.length,
+                                    processedLines: songs.length + duplicates.length
+                                }
+                            });
+                        }
+                        
+                    } catch (error) {
+                        console.error('XML解析错误:', error);
+                        reject(new Error('XML格式解析失败：' + error.message));
+                    }
+                }, 100);
+                
+            } catch (error) {
+                reject(error);
+            }
+        });
+    },
+
+    async parse(input, options, progressCallback) {
+        if (!input || typeof input !== 'string') {
+            throw new Error('输入数据无效');
+        }
+
+        if (this.isXmlFormat(input)) {
+            return await this.parseXml(input, options, progressCallback);
+        } else {
+            return this.parseTsv(input, options);
+        }
+    },
+
+    decodeXmlEntities(text) {
+        return text
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&apos;/g, "'")
+            .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+    },
+
+    parseTsv(input, options) {
         const lines = input.split('\n').filter(line => line.trim() !== '');
         if (lines.length === 0) {
             throw new Error('没有找到有效数据');
@@ -50,8 +243,7 @@ Johnny B. Goode	Chuck Berry	Chuck Berry	Berry Is On Top						Rock	5996081	161	1	
             songs.push({
                 title,
                 artist,
-                key,
-                lineNumber: i + 1
+                key
             });
         }
 
@@ -130,6 +322,12 @@ Johnny B. Goode	Chuck Berry	Chuck Berry	Berry Is On Top						Rock	5996081	161	1	
 
     validate(input) {
         if (!input || typeof input !== 'string') return false;
+        
+        const trimmed = input.trim();
+        
+        if (trimmed.startsWith('<?xml') || trimmed.startsWith('<plist')) {
+            return trimmed.includes('<key>Tracks</key>');
+        }
         
         const lines = input.split('\n').filter(line => line.trim());
         if (lines.length < 2) return false;

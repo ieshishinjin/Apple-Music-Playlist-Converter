@@ -49,7 +49,12 @@ const I18n = {
             alertConvertFailed: '转换失败：{error}',
             alertBrowserCompat: '提示：当前浏览器可能不支持全部功能，建议使用最新版 Chrome、Firefox 或 Safari。',
             
-            duplicateMessage: '，去重了 {count} 首'
+            duplicateMessage: '，去重了 {count} 首',
+            pasteXmlExample: '粘贴XML示例',
+            uploadFile: '上传文件',
+            fileInputLabel: '选择文件',
+            xmlFormat: 'XML格式',
+            progress: '解析进度',
         },
         en: {
             pageTitle: 'Apple Music Playlist Converter',
@@ -98,7 +103,12 @@ const I18n = {
             alertConvertFailed: 'Conversion failed: {error}',
             alertBrowserCompat: 'Note: Your browser may not support all features. Please use latest Chrome, Firefox or Safari.',
             
-            duplicateMessage: ', removed {count} duplicates'
+            duplicateMessage: ', removed {count} duplicates',
+            pasteXmlExample: 'Paste XML example',
+            uploadFile: 'Upload file',
+            fileInputLabel: 'Choose file',
+            xmlFormat: 'XML format',
+            progress: 'Parsing Progress',
         }
     },
     
