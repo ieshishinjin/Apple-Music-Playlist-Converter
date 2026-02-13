@@ -11,13 +11,15 @@ Johnny B. Goode	Chuck Berry	Chuck Berry	Berry Is On Top						Rock	5996081	161	1	
     <dict>
         <key>7077</key>
         <dict>
-            <key>Name</key><string>你一定要幸福</string>
-            <key>Artist</key><string>虎二</string>
+            <key>Name</key><string>Here Comes the Sun</string>
+            <key>Artist</key><string>The Beatles</string>
+            <key>Album</key><string>Abey Road(Remastered)</string>
         </dict>
         <key>7080</key>
         <dict>
-            <key>Name</key><string>Intro</string>
-            <key>Artist</key><string>周杰伦</string>
+            <key>Name</key><string>The Great Gig in the Sky</string>
+            <key>Artist</key><string>Pink Floyd</string>
+            <key>Album</key><string>The Dark Side of the Moon(50th Anniversary)[Remastered]</string>
         </dict>
     </dict>
 </dict>
