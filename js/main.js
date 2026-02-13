@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    I18n.init();
     UIManager.init();
     
     checkBrowserCompatibility();
     
     console.log('Apple Music Playlist Converter 已启动');
+    
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            I18n.toggleLanguage();
+        });
+    }
+});
+
+document.addEventListener('languageChanged', () => {
+    if (UIManager.elements.formatLabel) {
+        UIManager.updateFormatLabel();
+    }
 });
 
 function checkBrowserCompatibility() {
@@ -22,7 +36,7 @@ function checkBrowserCompatibility() {
         
         const flash = document.getElementById('flashMessage');
         if (flash) {
-            flash.textContent = '提示：当前浏览器可能不支持全部功能，建议使用最新版 Chrome、Firefox 或 Safari。';
+            flash.textContent = I18n.t('alertBrowserCompat');
             flash.className = 'flash flash-warn';
             flash.style.display = 'block';
         }
@@ -45,5 +59,6 @@ document.addEventListener('keydown', (e) => {
 
 window.App = {
     converter: PlaylistConverter,
-    ui: UIManager
+    ui: UIManager,
+    i18n: I18n
 };

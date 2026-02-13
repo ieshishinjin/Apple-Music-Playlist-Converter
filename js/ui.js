@@ -66,7 +66,7 @@ const UIManager = {
         const input = this.elements.inputText?.value.trim();
         
         if (!input) {
-            this.showMessage('请先粘贴歌单数据！', 'warn');
+            this.showMessage('alertPasteFirst', 'warn');
             return;
         }
 
@@ -82,7 +82,7 @@ const UIManager = {
             const result = PlaylistConverter.parse(input, options);
             
             if (result.songs.length === 0) {
-                this.showMessage('没有找到有效的歌曲数据', 'warn');
+                this.showMessage('alertNoData', 'warn');
                 return;
             }
 
@@ -99,13 +99,16 @@ const UIManager = {
             this.elements.previewContent.textContent = previewLines.join('\n');
 
             const dupMsg = result.stats.duplicateCount > 0 
-                ? `，去重了 ${result.stats.duplicateCount} 首` 
+                ? I18n.t('duplicateMessage', { count: result.stats.duplicateCount })
                 : '';
-            this.showMessage(`转换成功！处理了 ${result.songs.length} 首歌${dupMsg}`, 'success');
+            this.showMessage('alertConvertSuccess', 'success', { 
+                count: result.songs.length, 
+                dupMsg: dupMsg 
+            });
 
         } catch (error) {
             console.error('转换失败:', error);
-            this.showMessage('转换失败：' + error.message, 'warn');
+            this.showMessage('alertConvertFailed', 'warn', { error: error.message });
         }
     },
 
@@ -132,7 +135,7 @@ const UIManager = {
         output.select();
         document.execCommand('copy');
         
-        this.showMessage('已复制到剪贴板！', 'success');
+        this.showMessage('alertCopySuccess', 'success');
     },
 
     handleDownload() {
@@ -151,29 +154,39 @@ const UIManager = {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        this.showMessage('文件下载中...', 'success');
+        this.showMessage('alertDownloadSuccess', 'success');
     },
 
     updateFormatLabel() {
         const format = this.elements.outputFormat?.value || 'artist-title';
-        const formatName = PlaylistConverter.getFormatName(format);
+        const t = I18n.translations[I18n.currentLang];
+        const formatNames = {
+            'artist-title': t.formatArtistTitle,
+            'title-artist': t.formatTitleArtist,
+            'title-only': t.formatTitleOnly,
+            'artist-only': t.formatArtistOnly,
+            'csv': t.formatCsv,
+            'm3u': t.formatM3u
+        };
         if (this.elements.formatLabel) {
-            this.elements.formatLabel.textContent = formatName;
+            this.elements.formatLabel.textContent = formatNames[format] || t.formatArtistTitle;
         }
     },
 
-    showMessage(message, type) {
+    showMessage(message, type, params = {}) {
         const flash = this.elements.flashMessage;
         if (!flash) return;
 
-        flash.textContent = message;
+        const translatedMsg = I18n.t(message, params);
+        
+        flash.textContent = translatedMsg;
         flash.className = `flash flash-${type}`;
         flash.style.display = 'block';
 
         setTimeout(() => {
             flash.style.display = 'none';
         }, 3000);
-    },
+},
 
     hideMessage() {
         if (this.elements.flashMessage) {

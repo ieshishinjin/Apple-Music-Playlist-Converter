@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apple Music Playlist Converter</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/github-dark.css">
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="css/github-dark.css?v=2">
     <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body>
@@ -15,12 +15,22 @@
                 <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM6.5 11.5L4 8l2.5-3.5h3L12 8l-2.5 3.5h-3Z"/>
                 </svg>
-                Apple Music Playlist Converter
-                <span class="Label" id="version-label">v1.0.0</span>
+                <span data-i18n="pageTitle">Apple Music 歌单转换器</span>
+                <span class="Label" id="version-label" data-i18n="version">v1.0.0</span>
             </h1>
-            <div class="page-description" id="page-description">
-                把 Apple Music 导出的歌单转换成其他音乐软件能识别的格式
+            
+            <div class="lang-toggle-container">
+                <button class="lang-toggle-btn" id="langToggle">
+                    <svg width="16" height="16" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM5.5 3.5c.5 0 .9.4.9.9v1.2c0 .5-.4.9-.9.9h-.9c-.5 0-.9.4-.9.9v.9c0 .5.4.9.9.9h.9c.5 0 .9-.4.9-.9v-.9h.9c.5 0 .9-.4.9-.9V4.4c0-.5.4-.9.9-.9h.9c.5 0 .9.4.9.9v1.2c0 .5-.4.9-.9.9h-.9v.9c0 .5.4.9.9.9h.9c.5 0 .9.4.9.9v.9c0 .5-.4.9-.9.9h-.9v.9c0 .5-.4.9-.9.9H9c-.5 0-.9-.4-.9-.9v-.9h-.9c-.5 0-.9-.4-.9-.9v-.9h-.9c-.5 0-.9-.4-.9-.9v-.9c0-.5.4-.9.9-.9h.9v-.9h-.9c-.5 0-.9-.4-.9-.9V4.4c0-.5.4-.9.9-.9h.9z"/>
+                    </svg>
+                    <span id="langToggleText">English</span>
+                </button>
             </div>
+        </div>
+
+        <div class="page-description" id="page-description" data-i18n="pageDescription">
+            把 Apple Music 导出的歌单转换成其他音乐软件能识别的格式
         </div>
 
         <div class="tabnav">
@@ -29,19 +39,19 @@
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8A1.5 1.5 0 0 0 3 3v8.25a2.5 2.5 0 0 1 1.5-.25h8Z"/>
                     </svg>
-                    Converter
+                    <span data-i18n="tabConverter">Converter</span>
                 </a>
                 <a class="tabnav-tab" href="https://github.com/ieshishinjin/Apple-Music-Playlist-Converter/issues" target="_blank">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Z"/>
                     </svg>
-                    Issues
+                    <span data-i18n="tabIssues">Issues</span>
                 </a>
                 <a class="tabnav-tab" href="https://github.com/ieshishinjin/Apple-Music-Playlist-Converter/pulls" target="_blank">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M4 9H3V8h1v1Zm0-3H3v1h1V6Zm0-2v1H3V4h1Zm2 9H4v-1h2v1Zm0-2H4v-1h2v1Zm0-2H4V8h2v1Zm0-2H4V6h2v1Zm0-2H4V4h2v1Zm6 7h-5v-1h5v1Zm0-2h-5v-1h5v1Zm0-2h-5V8h5v1Zm0-2h-5V6h5v1Zm0-2h-5V4h5v1Z"/>
                     </svg>
-                    Pull requests
+                    <span data-i18n="tabPullRequests">Pull requests</span>
                 </a>
             </div>
         </div>
@@ -54,11 +64,11 @@
                             <path d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25Z"/>
                             <path d="M3.5 6.25c0-.966.784-1.75 1.75-1.75h5.5c.966 0 1.75.784 1.75 1.75v5.5a1.75 1.75 0 0 1-1.75 1.75h-5.5A1.75 1.75 0 0 1 3.5 11.75Zm1.75-.25a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h5.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25Z"/>
                         </svg>
-                        Input
+                        <span data-i18n="inputTitle">Input</span>
                     </div>
                 </div>
                 <div class="Box-body">
-                    <textarea id="inputText" class="form-control" placeholder="把 Apple Music 复制的歌单粘贴到这里..."></textarea>
+                    <textarea id="inputText" class="form-control" data-i18n-attr="placeholder:inputPlaceholder" placeholder="把 Apple Music 复制的歌单粘贴到这里..."></textarea>
                     
                     <div class="action-buttons">
                         <button class="btn btn-secondary" id="pasteExampleBtn">
@@ -66,7 +76,7 @@
                                 <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
                                 <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
                             </svg>
-                            粘贴示例
+                            <span data-i18n="pasteExample">粘贴示例</span>
                         </button>
                         <button class="btn btn-secondary" id="clearBtn">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -74,7 +84,7 @@
                                 <path d="M6.5 5.75a.75.75 0 0 1 1.5 0v5.5a.75.75 0 0 1-1.5 0v-5.5Zm3.5 0a.75.75 0 0 1 1.5 0v5.5a.75.75 0 0 1-1.5 0v-5.5Z"></path>
                                 <path d="M4.75 3v9.5a.25.25 0 0 0 .25.25h6a.25.25 0 0 0 .25-.25V3h-6.5Zm-1.5-1.5h9.5v11c0 .966-.784 1.75-1.75 1.75h-6A1.75 1.75 0 0 1 3.25 12.5v-11Z"></path>
                             </svg>
-                            清空
+                            <span data-i18n="clear">清空</span>
                         </button>
                     </div>
                 </div>
@@ -87,34 +97,37 @@
                             <path d="M5.75 1a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 5.75 1Zm4.5 0a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5a.75.75 0 0 1 .75-.75Z"></path>
                             <path d="M3.5 6.5h9V5h-9v1.5Zm0 5h9V10h-9v1.5ZM12.75 3h-9.5A1.75 1.75 0 0 0 1.5 4.75v8.5c0 .966.784 1.75 1.75 1.75h9.5a1.75 1.75 0 0 0 1.75-1.75v-8.5A1.75 1.75 0 0 0 12.75 3Z"></path>
                         </svg>
-                        Options
+                        <span data-i18n="optionsTitle">Options</span>
                     </div>
                 </div>
                 <div class="Box-body">
                     <div class="options-grid">
                         <div class="option-group">
-                            <label class="option-label">输出格式</label>
+                            <label class="option-label" data-i18n="outputFormat">输出格式</label>
                             <select id="outputFormat" class="form-control">
-                                <option value="artist-title">歌手 - 歌名 (推荐)</option>
-                                <option value="title-artist">歌名 - 歌手</option>
-                                <option value="title-only">仅歌名</option>
-                                <option value="artist-only">仅歌手</option>
-                                <option value="csv">CSV格式 (歌名,歌手)</option>
-                                <option value="m3u">M3U播放列表</option>
+                                <option value="artist-title" data-i18n="formatArtistTitle">歌手 - 歌名 (推荐)</option>
+                                <option value="title-artist" data-i18n="formatTitleArtist">歌名 - 歌手</option>
+                                <option value="title-only" data-i18n="formatTitleOnly">仅歌名</option>
+                                <option value="artist-only" data-i18n="formatArtistOnly">仅歌手</option>
+                                <option value="csv" data-i18n="formatCsv">CSV格式 (歌名,歌手)</option>
+                                <option value="m3u" data-i18n="formatM3u">M3U播放列表</option>
                             </select>
                         </div>
                         
                         <div class="option-group">
-                            <label class="option-label">处理选项</label>
+                            <label class="option-label" data-i18n="processingOptions">处理选项</label>
                             <div class="checkbox-group">
                                 <label class="checkbox-label">
-                                    <input type="checkbox" id="removeDup" checked> 去重
+                                    <input type="checkbox" id="removeDup" checked>
+                                    <span data-i18n="removeDup">去重</span>
                                 </label>
                                 <label class="checkbox-label">
-                                    <input type="checkbox" id="trimSpaces" checked> 清理多余空格
+                                    <input type="checkbox" id="trimSpaces" checked>
+                                    <span data-i18n="trimSpaces">清理多余空格</span>
                                 </label>
                                 <label class="checkbox-label">
-                                    <input type="checkbox" id="ignoreHeader" checked> 忽略表头行
+                                    <input type="checkbox" id="ignoreHeader" checked>
+                                    <span data-i18n="ignoreHeader">忽略表头行</span>
                                 </label>
                             </div>
                         </div>
@@ -125,7 +138,7 @@
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm-1.5 0a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm10.646-2.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 8.293l2.646-2.647Z"/>
                             </svg>
-                            转换歌单
+                            <span data-i18n="convertButton">转换歌单</span>
                         </button>
                     </div>
                 </div>
@@ -137,7 +150,7 @@
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M2 1.75C2 .784 2.784 0 3.75 0h8.5C13.216 0 14 .784 14 1.75v12.5A1.75 1.75 0 0 1 12.25 16h-8.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25ZM7 4a1 1 0 1 1 2 0v6a1 1 0 1 1-2 0V4Zm3 2a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0V6ZM5 9a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0V9Z"/>
                         </svg>
-                        Statistics
+                        <span data-i18n="statistics">Statistics</span>
                     </div>
                 </div>
                 <div class="Box-body">
@@ -148,7 +161,7 @@
                                 <path d="M8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm.75 5.75v-4a.75.75 0 0 0-1.5 0v4a.75.75 0 0 0 1.5 0Z"/>
                             </svg>
                             <span class="stat-number" id="songCount">0</span>
-                            <span class="stat-label">首歌曲</span>
+                            <span class="stat-label" data-i18n="songCount">首歌曲</span>
                         </div>
                         <div class="stat">
                             <svg width="16" height="16" viewBox="0 0 16 16">
@@ -156,7 +169,7 @@
                                 <path d="M6 5a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm-4.5 2.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM11 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>
                             </svg>
                             <span class="stat-number" id="dupCount">0</span>
-                            <span class="stat-label">重复去除</span>
+                            <span class="stat-label" data-i18n="duplicateCount">重复去除</span>
                         </div>
                     </div>
                 </div>
@@ -169,7 +182,7 @@
                             <path d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25Z"/>
                             <path d="M3.5 6.25c0-.966.784-1.75 1.75-1.75h5.5c.966 0 1.75.784 1.75 1.75v5.5a1.75 1.75 0 0 1-1.75 1.75h-5.5A1.75 1.75 0 0 1 3.5 11.75Zm1.75-.25a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h5.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25Z"/>
                         </svg>
-                        Output
+                        <span data-i18n="outputTitle">Output</span>
                     </div>
                     <div class="labels">
                         <span id="formatLabel" class="Label">歌手 - 歌名</span>
@@ -185,14 +198,14 @@
                                     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path>
                                     <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
                                 </svg>
-                                复制结果
+                                <span data-i18n="copyButton">复制结果</span>
                             </button>
                             <button class="btn btn-secondary" id="downloadBtn">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                     <path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"></path>
                                     <path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"></path>
                                 </svg>
-                                下载文件
+                                <span data-i18n="downloadButton">下载文件</span>
                             </button>
                         </div>
                     </div>
@@ -203,12 +216,12 @@
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8A1.5 1.5 0 0 0 3 3v8.25a2.5 2.5 0 0 1 1.5-.25h8Z"/>
                         </svg>
-                        预览（前10首）
+                        <span data-i18n="preview">预览（前10首）</span>
                     </div>
                     <div id="previewContent" class="preview"></div>
                 </div>
                 
-                <div class="Box-footer">
+                <div class="Box-footer" data-i18n="footer">
                     ⚡ 纯本地处理 · 你的数据不会离开浏览器
                 </div>
             </div>
@@ -217,8 +230,9 @@
         <div id="flashMessage" class="flash"></div>
     </main>
 
-    <script src="js/converter.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/i18n.js?v=2"></script>
+    <script src="js/converter.js?v=2"></script>
+    <script src="js/ui.js?v=2"></script>
+    <script src="js/main.js?v=2"></script>
 </body>
 </html>

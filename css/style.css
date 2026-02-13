@@ -45,6 +45,11 @@ body {
     margin-bottom: 24px;
     border-bottom: 1px solid var(--color-border-muted);
     padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .page-header h1 {
@@ -53,6 +58,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0;
 }
 
 .page-header h1 svg {
@@ -62,7 +68,43 @@ body {
 .page-description {
     color: var(--color-fg-muted);
     font-size: 16px;
-    margin-top: 8px;
+    margin: 0 0 24px 0;
+    width: 100%;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.lang-toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.lang-toggle-btn {
+    background-color: var(--color-canvas-subtle);
+    border: 1px solid var(--color-border-default);
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-fg-default);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s;
+    height: 36px;
+    white-space: nowrap;
+}
+
+.lang-toggle-btn:hover {
+    background-color: var(--color-canvas-default);
+    border-color: var(--color-primary);
+}
+
+.lang-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--color-fg-muted);
 }
 
 .tabnav {
@@ -280,6 +322,10 @@ select.form-control {
     cursor: pointer;
 }
 
+.checkbox-label input {
+    margin: 0;
+}
+
 .convert-button-container {
     margin-top: 16px;
 }
@@ -376,5 +422,14 @@ select.form-control {
     .stats {
         flex-direction: column;
         gap: 12px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .lang-toggle-container {
+        align-self: flex-end;
     }
 }
